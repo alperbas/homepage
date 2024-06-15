@@ -558,6 +558,11 @@
         "failed": "Failed",
         "unknown": "Unknown"
     },
+    "semaphore": {
+        "running": "Running",
+        "failed": "Failed",
+        "succeeded": "Succeeded"
+    },
     "paperlessngx": {
         "inbox": "Inbox",
         "total": "Total"

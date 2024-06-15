@@ -99,6 +99,7 @@ const components = {
   rutorrent: dynamic(() => import("./rutorrent/component")),
   sabnzbd: dynamic(() => import("./sabnzbd/component")),
   scrutiny: dynamic(() => import("./scrutiny/component")),
+  semaphore: dynamic(() => import("./semaphore/component")),
   sonarr: dynamic(() => import("./sonarr/component")),
   speedtest: dynamic(() => import("./speedtest/component")),
   stash: dynamic(() => import("./stash/component")),
