@@ -254,7 +254,8 @@ export async function servicesFromKubernetes() {
           ingress.metadata.annotations &&
           ingress.metadata.annotations[`${ANNOTATION_BASE}/enabled`] === "true" &&
           (!ingress.metadata.annotations[`${ANNOTATION_BASE}/instance`] ||
-            ingress.metadata.annotations[`${ANNOTATION_BASE}/instance`] === instanceName),
+            ingress.metadata.annotations[`${ANNOTATION_BASE}/instance`] === instanceName ||
+            `${ANNOTATION_BASE}/instance.${instanceName}` in ingress.metadata.annotations),
       )
       .map((ingress) => {
         let constructedService = {
@@ -462,6 +463,9 @@ export function cleanServiceGroups(groups) {
 
           // unifi
           site,
+
+          // wgeasy
+          threshold,
         } = cleanedService.widget;
 
         let fieldsList = fields;
@@ -595,6 +599,9 @@ export function cleanServiceGroups(groups) {
           if (bitratePrecision !== undefined) {
             cleanedService.widget.bitratePrecision = parseInt(bitratePrecision, 10);
           }
+        }
+        if (type === "wgeasy") {
+          if (threshold !== undefined) cleanedService.widget.threshold = parseInt(threshold, 10);
         }
       }
 
