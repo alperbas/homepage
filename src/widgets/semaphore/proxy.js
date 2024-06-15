@@ -8,23 +8,23 @@ const logger = createLogger("semaphoreProxyHandler");
 
 async function fetchSemaphoreCookie(widget, loginURL) {
   const url = new URL(formatApiCall(loginURL, widget));
-  const [status, , , responseHeaders,] = await httpProxy(url, {
+  const [status, , , responseHeaders] = await httpProxy(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "accept": "application/json"
+      accept: "application/json",
     },
     body: JSON.stringify({
       auth: widget.username,
-      password: widget.password
+      password: widget.password,
     }),
   });
 
-  if (!(status === 204) || !('set-cookie' in responseHeaders)) {
+  if (!(status === 204) || !("set-cookie" in responseHeaders)) {
     logger.error("Failed to fetch semaphore cookie, status: %d", status);
     return null;
   }
-  return responseHeaders['set-cookie'];
+  return responseHeaders["set-cookie"];
 }
 
 export default async function semaphoreProxyHandler(req, res) {
@@ -48,10 +48,10 @@ export default async function semaphoreProxyHandler(req, res) {
       return res.status(500).json({ error: "Failed to authenticate with semaphore" });
     }
     // Add the cookie to the widget for use in subsequent requests
-    widget.headers= {
+    widget.headers = {
       "Content-Type": "application/json",
-      "accept": "application/json"
-    }
+      accept: "application/json",
+    };
     widget.headers = { ...widget.headers, Cookie: semaphoreCookie };
   }
 
@@ -68,10 +68,10 @@ export default async function semaphoreProxyHandler(req, res) {
       return res.status(status).json({ error: "Failed to call semaphore API", data });
     }
 
-    const parsedData = {}
-    parsedData.taskRunning = JSON.parse(data).filter(d => d.status === 'running').length;
-    parsedData.taskFailed = JSON.parse(data).filter(d => d.status === 'error').length;
-    parsedData.taskSucceeded = JSON.parse(data).filter(d => d.status === 'success').length;
+    const parsedData = {};
+    parsedData.taskRunning = JSON.parse(data).filter((d) => d.status === "running").length;
+    parsedData.taskFailed = JSON.parse(data).filter((d) => d.status === "error").length;
+    parsedData.taskSucceeded = JSON.parse(data).filter((d) => d.status === "success").length;
 
     return res.status(status).send(parsedData);
   } catch (error) {
