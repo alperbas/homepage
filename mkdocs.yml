@@ -21,8 +21,8 @@ nav:
       - configs/index.md
       - configs/settings.md
       - configs/bookmarks.md
+      - configs/info-widgets.md
       - configs/services.md
-      - configs/service-widgets.md
       - configs/kubernetes.md
       - configs/docker.md
       - configs/custom-css-js.md
@@ -31,12 +31,14 @@ nav:
       - "Service Widgets":
           - widgets/services/index.md
           - widgets/services/adguard-home.md
+          - widgets/services/argocd.md
           - widgets/services/atsumeru.md
           - widgets/services/audiobookshelf.md
           - widgets/services/authentik.md
           - widgets/services/autobrr.md
           - widgets/services/azuredevops.md
           - widgets/services/bazarr.md
+          - widgets/services/beszel.md
           - widgets/services/caddy.md
           - widgets/services/calendar.md
           - widgets/services/calibre-web.md
@@ -47,6 +49,7 @@ nav:
           - widgets/services/crowdsec.md
           - widgets/services/customapi.md
           - widgets/services/deluge.md
+          - widgets/services/develancacheui.md
           - widgets/services/diskstation.md
           - widgets/services/downloadstation.md
           - widgets/services/emby.md
@@ -55,16 +58,19 @@ nav:
           - widgets/services/fileflows.md
           - widgets/services/flood.md
           - widgets/services/freshrss.md
+          - widgets/services/frigate.md
           - widgets/services/fritzbox.md
           - widgets/services/gamedig.md
           - widgets/services/gatus.md
           - widgets/services/ghostfolio.md
           - widgets/services/gitea.md
+          - widgets/services/gitlab.md
           - widgets/services/glances.md
           - widgets/services/gluetun.md
           - widgets/services/gotify.md
           - widgets/services/grafana.md
           - widgets/services/hdhomerun.md
+          - widgets/services/headscale.md
           - widgets/services/healthchecks.md
           - widgets/services/homeassistant.md
           - widgets/services/homebox.md
@@ -79,7 +85,10 @@ nav:
           - widgets/services/komga.md
           - widgets/services/kopia.md
           - widgets/services/lidarr.md
+          - widgets/services/linkwarden.md
+          - widgets/services/lubelogger.md
           - widgets/services/mastodon.md
+          - widgets/services/mailcow.md
           - widgets/services/mealie.md
           - widgets/services/medusa.md
           - widgets/services/mikrotik.md
@@ -88,6 +97,7 @@ nav:
           - widgets/services/mjpeg.md
           - widgets/services/moonraker.md
           - widgets/services/mylar.md
+          - widgets/services/myspeed.md
           - widgets/services/navidrome.md
           - widgets/services/netdata.md
           - widgets/services/netalertx.md
@@ -113,6 +123,7 @@ nav:
           - widgets/services/plex.md
           - widgets/services/portainer.md
           - widgets/services/prometheus.md
+          - widgets/services/prometheusmetric.md
           - widgets/services/prowlarr.md
           - widgets/services/proxmox.md
           - widgets/services/proxmoxbackupserver.md
@@ -128,11 +139,15 @@ nav:
           - widgets/services/scrutiny.md
           - widgets/services/sonarr.md
           - widgets/services/speedtest-tracker.md
+          - widgets/services/spoolman.md
           - widgets/services/stash.md
+          - widgets/services/stocks.md
+          - widgets/services/suwayomi.md
           - widgets/services/swagdashboard.md
           - widgets/services/syncthing-relay-server.md
           - widgets/services/tailscale.md
           - widgets/services/tandoor.md
+          - widgets/services/technitium.md
           - widgets/services/tdarr.md
           - widgets/services/traefik.md
           - widgets/services/transmission.md
@@ -143,10 +158,12 @@ nav:
           - widgets/services/uptime-kuma.md
           - widgets/services/uptimerobot.md
           - widgets/services/urbackup.md
+          - widgets/services/vikunja.md
           - widgets/services/watchtower.md
           - widgets/services/wgeasy.md
           - widgets/services/whatsupdocker.md
           - widgets/services/xteve.md
+          - widgets/services/zabbix.md
       - "Information Widgets":
           - widgets/info/index.md
           - widgets/info/datetime.md
@@ -159,10 +176,11 @@ nav:
           - widgets/info/openweathermap.md
           - widgets/info/resources.md
           - widgets/info/search.md
+          - widgets/info/stocks.md
           - widgets/info/unifi_controller.md
-          - widgets/info/weather.md
   - "Learn":
       - widgets/authoring/index.md
+      - "Getting Started": widgets/authoring/getting-started.md
       - "Tutorials":
           - widgets/authoring/tutorial.md
       - "Guides":
@@ -175,8 +193,9 @@ nav:
       - troubleshooting/index.md
   - "More":
       - more/index.md
-      - more/development.md
       - more/translations.md
+      - more/coverage.md
+      - more/sponsors.md
       - more/homepage-move.md
 
 theme:
@@ -202,7 +221,8 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to system preference
-  logo: assets/light_squircle@2x.png
+  logo: assets/banner_light@2x.webp
+
   favicon: assets/favicon.ico
   features:
     - navigation.instant
@@ -219,19 +239,17 @@ theme:
 
 extra_css:
   - "stylesheets/extra.css"
-extra_javascript:
-  - "scripts/extra.js"
 
 extra:
-  version:
-    provider: mike
   social:
     - icon: fontawesome/brands/discord
       link: https://discord.gg/k4ruYNrudu
-    - icon: fontawesome/regular/message
-      link: https://github.com/gethomepage/homepage/discussions
     - icon: fontawesome/brands/github
       link: https://github.com/gethomepage/homepage
+    - icon: simple/opencollective
+      link: https://opencollective.com/homepage
+    - icon: simple/patreon
+      link: https://www.patreon.com/gethomepage
 
 markdown_extensions:
   - pymdownx.highlight:
@@ -262,12 +280,12 @@ plugins:
       plugins:
         - typeset
         - social:
-            cards_layout_dir: docs/layouts
-            cards_layout: custom
+            cards_layout: default
             cards_layout_options:
-              background_image: docs/assets/BlossomValley.jpg
+              background_image: docs/assets/blossom_valley_blur.jpg
               background_color: "rgba(13, 29, 41, 128)"
               color: "#ffffff"
+              logo: docs/assets/light_squircle@2x.webp
   - tags
   - search:
       pipeline:
@@ -277,3 +295,4 @@ plugins:
   - redirects:
       redirect_maps:
         "more/troubleshooting.md": "troubleshooting/index.md"
+        "more/development.md": "widgets/authoring/getting-started.md"
